@@ -58,6 +58,11 @@ class App:
         self._display_surf.fill((202, 252, 121))
         self.player.draw(self._display_surf, self._image_surf)
         self.apple.draw(self._display_surf, self._apple_surf)
+
+        fontdir = pygame.font.match_font("tekolight", False, False)
+        myfont = pygame.font.Font(fontdir, 32)
+        self._display_surf.blit(myfont.render("Highscore: "+str(self.player.length), True, (0, 0, 0)), (20, 360))
+
         pygame.display.flip()
 
     def on_cleanup(self):
