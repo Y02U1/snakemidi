@@ -1,6 +1,14 @@
 import pygame
 from GameObjects import *
 import time
+from random import randint
+
+def is_collision(x1, y1, x2, y2, bsize):
+    if x1 >= x2 and x1 <= x2 + bsize:
+        if y1 >= y2 and y1 <= y2 + bsize:
+            return True
+    return False
+
 
 class App:
     def __init__(self):
@@ -35,6 +43,16 @@ class App:
 
     def on_loop(self):
         self.player.update()
+
+        for i in range(0, self.player.length):
+            if is_collision(self.apple.x, self.apple.y, self.player.x[i], self.player.y[i], 8):
+                self.apple.x = randint(2, 9) * 16
+                self.apple.y = randint(2, 9) * 16
+                self.player.length = self.player.length + 1
+
+        for i in range(2, self.player.length):
+            if is_collision(self.player.x[0], self.player.y[0], self.player.x[i], self.player.y[i], 8):
+                exit(0)
 
     def on_render(self):
         self._display_surf.fill((202, 252, 121))

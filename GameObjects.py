@@ -1,6 +1,6 @@
 class Player:
-    x = []
-    y = []
+    x = [0]
+    y = [0]
     speed = 16
     direction = 0
 
@@ -9,9 +9,11 @@ class Player:
 
     def __init__(self, length):
         self.length = length
-        for i in range(0, self.length):
-            self.x.append(0)
-            self.y.append(0)
+        for i in range(0, 2000):
+            self.x.append(-100)
+            self.y.append(-100)
+        self.x[1] = 1 * 16
+        self.x[2] = 2 * 16
 
     def update(self):
 
@@ -50,7 +52,7 @@ class Player:
 class Apple:
     x = 0
     y = 0
-    step = 32
+    step = 16
 
     def __init__(self, x, y):
         self.x = x * self.step
