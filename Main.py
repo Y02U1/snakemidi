@@ -34,7 +34,7 @@ class App:
         self.player.update()
 
     def on_render(self):
-        self._display_surf.fill((0, 0, 0))
+        self._display_surf.fill((202, 252, 121))
         self.player.draw(self._display_surf, self._image_surf)
         pygame.display.flip()
 
