@@ -2,13 +2,13 @@ class Player:
     x = []
     y = []
     speed = 16
-    length = 16
     direction = 0
 
     updateCountMax = 2
     updateCount = 0
 
-    def __init__(self):
+    def __init__(self, length):
+        self.length = length
         for i in range(0, self.length):
             self.x.append(0)
             self.y.append(0)
@@ -45,3 +45,16 @@ class Player:
 
     def down(self):
         self.direction = 3
+
+
+class Apple:
+    x = 0
+    y = 0
+    step = 32
+
+    def __init__(self, x, y):
+        self.x = x * self.step
+        self.y = y * self.step
+
+    def draw(self, surface, image):
+        surface.blit(image, (self.x, self.y))

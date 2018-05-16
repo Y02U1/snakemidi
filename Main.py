@@ -7,8 +7,10 @@ class App:
         self._running = True
         self._display_surf = None
         self._image_surf = None
+        self._apple_surf = None
         self.size = self.width, self.height = 640, 400
-        self.player = Player()
+        self.player = Player(10)
+        self.apple = Apple(5, 5)
 
     def on_init(self):
         pygame.init()
@@ -16,6 +18,7 @@ class App:
         pygame.display.set_caption("Snake")
         self._running = True
         self._image_surf = pygame.image.load("block.png").convert()
+        self._apple_surf = pygame.image.load("apple.png").convert()
 
     def on_event(self, event):
         if event.type == pygame.QUIT:
@@ -36,6 +39,7 @@ class App:
     def on_render(self):
         self._display_surf.fill((202, 252, 121))
         self.player.draw(self._display_surf, self._image_surf)
+        self.apple.draw(self._display_surf, self._apple_surf)
         pygame.display.flip()
 
     def on_cleanup(self):
