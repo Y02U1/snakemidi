@@ -23,6 +23,7 @@ class App:
         self.size = self.width, self.height = 640, 400
         self.player = Player(5)
         self.apple = Apple(5, 5)
+        self.music = None
 
     def on_init(self):
         pygame.init()
@@ -71,9 +72,10 @@ class App:
 
     def on_cleanup(self):
         pygame.quit()
+        self.music.kill()
 
     def on_execute(self):
-        subprocess.Popen(['java', '-jar', 'KISSMIDI.jar', 'Super Mario Bros - Ground Theme.mid'])
+        self.music = subprocess.Popen(['java', '-jar', 'KISSMIDI.jar', 'Super Mario Bros - Ground Theme.mid'])
         if self.on_init() == False:
             self._running = False
         while self._running:
