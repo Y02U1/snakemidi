@@ -2,6 +2,7 @@ import pygame
 from GameObjects import *
 import time
 from random import randint
+from MIDIUtils import read_midi, split_midi
 
 def is_collision(x1, y1, x2, y2, bsize):
     if x1 >= x2 and x1 <= x2 + bsize:
@@ -17,7 +18,7 @@ class App:
         self._image_surf = None
         self._apple_surf = None
         self.size = self.width, self.height = 640, 400
-        self.player = Player(10)
+        self.player = Player(5)
         self.apple = Apple(5, 5)
 
     def on_init(self):
@@ -69,6 +70,10 @@ class App:
         pygame.quit()
 
     def on_execute(self):
+        # read_midi('Super Mario Bros - Ground Theme.mid')
+        # pygame.mixer.music.load('Super Mario Bros - Ground Theme.mid')
+        # pygame.mixer.music.play(-1)
+        split_midi('Super Mario Bros - Ground Theme.mid')
         if self.on_init() == False:
             self._running = False
         while self._running:
@@ -76,7 +81,7 @@ class App:
                 self.on_event(event)
             self.on_loop()
             self.on_render()
-            time.sleep(50.0/1000.0)
+            time.sleep(50.0/(1000.0+self.player.length*100))
         self.on_cleanup()
 
 
