@@ -1,8 +1,11 @@
 import pygame
+import subprocess
+
 from GameObjects import *
 import time
 from random import randint
-from MIDIUtils import read_midi, split_midi
+from MIDIUtils import *
+
 
 def is_collision(x1, y1, x2, y2, bsize):
     if x1 >= x2 and x1 <= x2 + bsize:
@@ -70,10 +73,7 @@ class App:
         pygame.quit()
 
     def on_execute(self):
-        # read_midi('Super Mario Bros - Ground Theme.mid')
-        # pygame.mixer.music.load('Super Mario Bros - Ground Theme.mid')
-        # pygame.mixer.music.play(-1)
-        split_midi('Super Mario Bros - Ground Theme.mid')
+        subprocess.Popen(['java', '-jar', 'KISSMIDI.jar', 'Super Mario Bros - Ground Theme.mid'])
         if self.on_init() == False:
             self._running = False
         while self._running:

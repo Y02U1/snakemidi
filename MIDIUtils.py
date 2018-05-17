@@ -1,4 +1,3 @@
-from mxm.midifile import MidiInFile, MidiToCode
 import mido
 
 
@@ -20,3 +19,6 @@ def split_midi(filename):
                     music_tracks.append(track)
                     break
     print(len(music_tracks))
+    with mido.MidiFile() as mid:
+        mid.tracks.append(music_tracks[0])
+        mid.play()
