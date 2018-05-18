@@ -57,6 +57,7 @@ class App:
 
         for i in range(2, self.player.length):
             if is_collision(self.player.x[0], self.player.y[0], self.player.x[i], self.player.y[i], 8):
+                self.music.kill()
                 exit(0)
 
     def on_render(self):
