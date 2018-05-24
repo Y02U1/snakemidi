@@ -60,3 +60,38 @@ class Apple:
 
     def draw(self, surface, image):
         surface.blit(image, (self.x, self.y))
+
+
+class PlayerContinuous:
+    x = 0
+    y = 0
+    speed = 0
+    direction = 0
+
+    def __init__(self):
+        pass
+
+    def update(self):
+        if self.direction == 0:
+            self.x = self.x + self.speed
+        elif self.direction == 1:
+            self.x = self.x - self.speed
+        elif self.direction == 2:
+            self.y = self.y - self.speed
+        elif self.direction == 3:
+            self.y = self.y + self.speed
+
+    def draw(self, surface, image):
+        surface.blit(image, (self.x, self.y))
+
+    def right(self):
+        self.direction = 0
+
+    def left(self):
+        self.direction = 1
+
+    def up(self):
+        self.direction = 2
+
+    def down(self):
+        self.direction = 3
