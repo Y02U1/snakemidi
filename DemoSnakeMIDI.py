@@ -4,7 +4,6 @@ import subprocess
 from GameObjects import *
 import time
 from MIDIUtils import proto
-from threading import Thread
 import matplotlib.pyplot as plt
 
 
@@ -14,7 +13,7 @@ class App:
         self._display_surf = None
         self._image_surf = None
         self._apple_surf = None
-        self.size = self.width, self.height = 1280, 680
+        self.size = self.width, self.height = 640, 400
         self.player = PlayerContinuous()
         self.apple = Apple(5, 5)
         self.musicFile = None
