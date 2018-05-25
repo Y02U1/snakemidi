@@ -1,7 +1,6 @@
 import mido
 from mido import tick2second
 import numpy as np
-from pytweening import easeInQuad
 import matplotlib
 matplotlib.use('Qt5Agg')
 import matplotlib.pyplot as plt
