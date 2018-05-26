@@ -58,7 +58,7 @@ class MIDIRhythm:
             if str(msg.type) == "note_on":
                 # Converti la durata in tick del messaggio in secondi
                 delta = round(tick2second(msg.time, tick_per_beat, self.get_tempo(track)), 2)
-                time_since_begin = time_since_begin + delta  # TODO controllare se questo non sia un passaggio inutile
+                time_since_begin = time_since_begin + delta
                 # Se è una pausa...
                 if msg.velocity is 0:
                     notes[0].append("p")
