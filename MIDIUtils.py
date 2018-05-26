@@ -157,7 +157,6 @@ class MIDIRhythm:
         const = 4
         return tempo / 1000000 * const * 100
 
-    # TODO trova nome "meaningful"
     def y_eased(self, x):
         """
         Calcola un valore di easing quadraticamente
