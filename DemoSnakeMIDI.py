@@ -3,7 +3,7 @@ import subprocess
 
 from GameObjects import *
 import time
-from MIDIUtils import proto
+from MIDIUtils import MIDIRhythm
 import matplotlib.pyplot as plt
 
 
@@ -31,7 +31,7 @@ class App:
         self._apple_surf = pygame.image.load("apple.png").convert()
         self.musicFile = 'everlasting_hymn.mid'
         # self.musicFile = 'test.mid'
-        staves = proto(self.musicFile)
+        staves = MIDIRhythm(self.musicFile).proto()
         self.start_music()
         x, y = staves[0][0], staves[0][1]
         self.musicData = {'x': x, 'y': y}
