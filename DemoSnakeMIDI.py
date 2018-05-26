@@ -15,12 +15,16 @@ class App:
         self._apple_surf = None
         self.size = self.width, self.height = 640, 400
         self.player = PlayerContinuous()
-        self.apple = Apple(5, 5)
+        self.apple = Apple(5, 5, 8, 8)  # FIXME non si può migliorare il passaggio della size?
         self.musicFile = None
         self.musicProcess = None
         self.musicData = None
         self.seek = 0
         self.length = 0
+        # 1 - facile
+        # 3 - medio
+        # 5 - difficile?
+        self.speed = 3
 
     def on_init(self):
         pygame.init()
@@ -28,7 +32,7 @@ class App:
         pygame.display.set_caption("Snake")
         self._running = True
         self._image_surf = pygame.image.load("img/block.png").convert()
-        self._apple_surf = pygame.image.load("img/apple.png").convert()
+        self._apple_surf = pygame.image.load("img/newapple.png").convert()
         self.musicFile = 'mid/everlasting_hymn.mid'
         # self.musicFile = 'test.mid'
         staves = MIDIRhythm(self.musicFile).proto()
@@ -51,9 +55,7 @@ class App:
                 self.player.right()
 
     def on_loop(self):
-        # print("Seek:", self.seek)
-        # print(self.musicData['x'])
-        self.player.speed = self.musicData['y'][self.seek]
+        self.player.speed = self.musicData['y'][self.seek]*self.speed
         self.player.update()
         if self.seek + 1 != self.length:
             self.seek = self.seek + 1
@@ -61,7 +63,11 @@ class App:
             self.seek = 0
             print("Ricomincia")
             print(time.time() - self.start)
-            # self.on_cleanup()
+            self.on_cleanup()
+
+        # FIXME non si può evitare il passaggio della size?
+        if self.apple.is_partial_collision(self.player.x, self.player.y, 16, 16):
+            self.apple.move(self.width, self.height)
 
     def on_render(self):
         self._display_surf.fill((202, 252, 121))
@@ -83,6 +89,12 @@ class App:
         if self.musicProcess is None:
             # self.musicProcess = subprocess.Popen(['java', '-jar', 'KISSMIDI.jar', self.musicFile])
             pass
+
+    def is_full_collision(self, x1, y1, x2, y2, bsize):
+        if x1 >= x2 and x1 <= x2 + bsize:
+            if y1 >= y2 and y1 <= y2 + bsize:
+                return True
+        return False
 
     def on_execute(self):
         if self.on_init() == False:

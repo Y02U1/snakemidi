@@ -1,3 +1,6 @@
+from random import randint
+
+
 class Player:
     x = [0]
     y = [0]
@@ -54,13 +57,37 @@ class Apple:
     y = 0
     step = 16
 
-    def __init__(self, x, y):
+    def __init__(self, x, y, width, height):
         self.x = x * self.step
         self.y = y * self.step
+        self.width = width
+        self.height = height
 
     def draw(self, surface, image):
         surface.blit(image, (self.x, self.y))
 
+    def is_partial_collision(self, x2, y2, w2, h2):
+        """
+        Controlla una collisione parziale con 1 altro oggetto
+        :param x2: x del secondo oggetto
+        :param y2: y del secondo oggetto
+        :param w2: larghezza del secondo oggetto
+        :param h2: altezza del secondo oggetto
+        :return: True - collisione. False - niente
+        """
+        if x2 <= self.x <= x2+w2 and y2 <= self.y <= y2 + h2:
+            return True
+        if x2 <= self.x+self.width <= x2+w2 and y2 <= self.y <= y2 + h2:
+            return True
+        if x2 <= self.x <= x2+w2 and y2 <= self.y + self.height <= y2 + h2:
+            return True
+        if x2 <= self.x+self.width <= x2+w2 and y2 <= self.y + self.height <= y2 + h2:
+            return True
+        return False
+
+    def move(self, window_width, window_height):
+        self.x = randint(0, window_width-self.width)
+        self.y = randint(0, window_height-self.height)
 
 class PlayerContinuous:
     x = 0
