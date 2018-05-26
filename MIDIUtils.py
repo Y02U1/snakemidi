@@ -215,7 +215,7 @@ def multitrack_x(staves):
 
 
 if __name__ == "__main__":
-    mid = MIDIRhythm("everlasting_hymn.mid")
+    mid = MIDIRhythm("mid/everlasting_hymn.mid")
     staves = mid.proto()
     # pickle.dump(staves, open("mario.p", "wb"))
     # staves = pickle.load(open("mario.p", "rb"))

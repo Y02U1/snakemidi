@@ -30,8 +30,8 @@ class App:
         self._display_surf = pygame.display.set_mode(self.size, pygame.HWSURFACE | pygame.DOUBLEBUF)
         pygame.display.set_caption("Snake")
         self._running = True
-        self._image_surf = pygame.image.load("block.png").convert()
-        self._apple_surf = pygame.image.load("apple.png").convert()
+        self._image_surf = pygame.image.load("mid/block.png").convert()
+        self._apple_surf = pygame.image.load("mid/apple.png").convert()
 
     def on_event(self, event):
         if event.type == pygame.QUIT:
@@ -76,7 +76,7 @@ class App:
         self.music.kill()
 
     def on_execute(self):
-        self.music = subprocess.Popen(['java', '-jar', 'KISSMIDI.jar', 'Super Mario Bros - Ground Theme.mid'])
+        self.music = subprocess.Popen(['java', '-jar', 'KISSMIDI.jar', 'mid/Super Mario Bros - Ground Theme.mid'])
         if self.on_init() == False:
             self._running = False
         while self._running:

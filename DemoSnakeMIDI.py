@@ -27,9 +27,9 @@ class App:
         self._display_surf = pygame.display.set_mode(self.size, pygame.HWSURFACE | pygame.DOUBLEBUF)
         pygame.display.set_caption("Snake")
         self._running = True
-        self._image_surf = pygame.image.load("block.png").convert()
-        self._apple_surf = pygame.image.load("apple.png").convert()
-        self.musicFile = 'everlasting_hymn.mid'
+        self._image_surf = pygame.image.load("img/block.png").convert()
+        self._apple_surf = pygame.image.load("img/apple.png").convert()
+        self.musicFile = 'mid/everlasting_hymn.mid'
         # self.musicFile = 'test.mid'
         staves = MIDIRhythm(self.musicFile).proto()
         self.start_music()
