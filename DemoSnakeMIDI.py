@@ -9,13 +9,13 @@ import matplotlib.pyplot as plt
 
 class App:
     def __init__(self):
-        self._running = True
+        self._running = False
         self._display_surf = None
         self._image_surf = None
         self._apple_surf = None
         self.size = self.width, self.height = 640, 400
-        self.player = PlayerContinuous()
-        self.apple = Apple(5, 5, 8, 8)  # FIXME non si può migliorare il passaggio della size?
+        self.player = None
+        self.apple = None
         self.musicFile = None
         self.musicProcess = None
         self.musicData = None
@@ -33,6 +33,8 @@ class App:
         self._running = True
         self._image_surf = pygame.image.load("img/block.png").convert()
         self._apple_surf = pygame.image.load("img/newapple.png").convert()
+        self.player = PlayerContinuous()
+        self.apple = Apple(5, 5, 8, 8)  # FIXME non si può migliorare il passaggio della size?
         self.musicFile = 'mid/everlasting_hymn.mid'
         # self.musicFile = 'test.mid'
         staves = MIDIRhythm(self.musicFile).proto()
@@ -70,15 +72,19 @@ class App:
             self.apple.move(self.width, self.height)
 
     def on_render(self):
+        # Sfondo
         self._display_surf.fill((202, 252, 121))
+
+        # GameObjects
         self.player.draw(self._display_surf, self._image_surf)
         self.apple.draw(self._display_surf, self._apple_surf)
 
+        # Testo
         fontdir = pygame.font.match_font("tekolight", False, False)
         myfont = pygame.font.Font(fontdir, 32)
         self._display_surf.blit(myfont.render(self.musicFile, True, (0, 0, 0)), (20, 360))
 
-        pygame.display.flip()
+        pygame.display.flip()  # Aggiorna
 
     def on_cleanup(self):
         pygame.quit()
@@ -91,8 +97,8 @@ class App:
             pass
 
     def is_full_collision(self, x1, y1, x2, y2, bsize):
-        if x1 >= x2 and x1 <= x2 + bsize:
-            if y1 >= y2 and y1 <= y2 + bsize:
+        if x2 <= x1 <= x2 + bsize:
+            if y2 <= y1 <= y2 + bsize:
                 return True
         return False
 

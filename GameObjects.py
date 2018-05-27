@@ -89,6 +89,7 @@ class Apple:
         self.x = randint(0, window_width-self.width)
         self.y = randint(0, window_height-self.height)
 
+
 class PlayerContinuous:
     x = 0
     y = 0
