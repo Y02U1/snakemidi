@@ -1,4 +1,5 @@
 from random import randint
+from pygame import draw
 
 
 class Player:
@@ -111,6 +112,47 @@ class PlayerContinuous:
 
     def draw(self, surface, image):
         surface.blit(image, (self.x, self.y))
+
+    def right(self):
+        self.direction = 0
+
+    def left(self):
+        self.direction = 1
+
+    def up(self):
+        self.direction = 2
+
+    def down(self):
+        self.direction = 3
+
+
+class PolySnake:
+    speed = 0
+    direction = 0
+
+    def __init__(self, width=16, height=16):
+        self.pointlist = [[0, 0], [width, 0], [width, height], [0, height]]
+
+    def update(self):
+        if self.direction == 0:
+            # Destra
+            for point in self.pointlist:
+                point[0] = point[0] + self.speed
+        elif self.direction == 1:
+            # Sinistra
+            for point in self.pointlist:
+                point[0] = point[0] - self.speed
+        elif self.direction == 2:
+            # Su
+            for point in self.pointlist:
+                point[1] = point[1] - self.speed
+        elif self.direction == 3:
+            # Giu
+            for point in self.pointlist:
+                point[1] = point[1] + self.speed
+
+    def draw(self, surface):
+        draw.polygon(surface, (0, 0, 0), self.pointlist)
 
     def right(self):
         self.direction = 0

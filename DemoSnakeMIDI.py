@@ -33,7 +33,7 @@ class App:
         self._running = True
         self._image_surf = pygame.image.load("img/block.png").convert()
         self._apple_surf = pygame.image.load("img/newapple.png").convert()
-        self.player = PlayerContinuous()
+        self.player = PolySnake(width=32)
         self.apple = Apple(5, 5, 8, 8)  # FIXME non si può migliorare il passaggio della size?
         self.musicFile = 'mid/everlasting_hymn.mid'
         # self.musicFile = 'test.mid'
@@ -68,15 +68,15 @@ class App:
             self.on_cleanup()
 
         # FIXME non si può evitare il passaggio della size?
-        if self.apple.is_partial_collision(self.player.x, self.player.y, 16, 16):
-            self.apple.move(self.width, self.height)
+#        if self.apple.is_partial_collision(self.player.x, self.player.y, 16, 16):
+#            self.apple.move(self.width, self.height)
 
     def on_render(self):
         # Sfondo
         self._display_surf.fill((202, 252, 121))
 
         # GameObjects
-        self.player.draw(self._display_surf, self._image_surf)
+        self.player.draw(self._display_surf)
         self.apple.draw(self._display_surf, self._apple_surf)
 
         # Testo
