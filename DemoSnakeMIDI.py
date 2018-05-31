@@ -35,7 +35,7 @@ class App:
         self._apple_surf = pygame.image.load("img/newapple.png").convert()
         self.player = PolySnake(width=32)
         self.apple = Apple(5, 5, 8, 8)  # FIXME non si può migliorare il passaggio della size?
-        self.musicFile = 'mid/everlasting_hymn.mid'
+        self.musicFile = 'mid/mario_refined.mid'
         # self.musicFile = 'test.mid'
         staves = MIDIRhythm(self.musicFile).proto()
         self.start_music()
