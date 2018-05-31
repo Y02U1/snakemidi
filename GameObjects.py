@@ -132,6 +132,36 @@ class PolySnake:
 
     def __init__(self, width=16, height=16):
         self.pointlist = [[0, 0], [width, 0], [width, height], [0, height]]
+        print(self.head())
+
+    def head(self):
+        return [round(len(self.pointlist)/2-1), round(-len(self.pointlist)/2+1)]
+
+    def pivot(self, old_dir, new_dir):
+        if old_dir == 0:
+            # DX
+            if new_dir == 2:
+                return self.head()[0]
+            else:
+                return self.head()[1]
+        elif old_dir == 1:
+            # SX
+            if new_dir == 2:
+                return self.head()[1]
+            else:
+                return self.head()[0]
+        elif old_dir == 2:
+            # Up
+            if new_dir == 0:
+                return self.head()[1]
+            else:
+                return self.head()[0]
+        elif old_dir == 3:
+            # Down
+            if new_dir == 0:
+                return self.head()[0]
+            else:
+                return self.head()[1]
 
     def update(self):
         if self.direction == 0:
@@ -155,13 +185,21 @@ class PolySnake:
         draw.polygon(surface, (0, 0, 0), self.pointlist)
 
     def right(self):
-        self.direction = 0
+        if self.direction != 1 and self.direction != 0:
+            print(self.pivot(self.direction, 0))
+            self.direction = 0
 
     def left(self):
-        self.direction = 1
+        if self.direction != 0 and self.direction != 1:
+            print(self.pivot(self.direction, 1))
+            self.direction = 1
 
     def up(self):
-        self.direction = 2
+        if self.direction != 3 and self.direction != 2:
+            print(self.pivot(self.direction, 2))
+            self.direction = 2
 
     def down(self):
-        self.direction = 3
+        if self.direction != 2 and self.direction != 3:
+            print(self.pivot(self.direction, 3))
+            self.direction = 3
